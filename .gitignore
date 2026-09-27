@@ -1,0 +1,6 @@
+# Only course public materials belong here.
+01_官方PDF/
+.codex-work/
+__pycache__/
+*.pyc
+~$*
