@@ -1,0 +1,15 @@
+// Original educational behavioral model; not a commercial device model.
+// Input: 50 ohm; output: 50 ohm Thevenin source. No DC supply or noise.
+`include "disciplines.vams"
+module edu_soft_limiter(in, out, gnd);
+  inout in, out, gnd;
+  electrical in, out, gnd;
+  parameter real rin = 50.0 from (0:inf);
+  parameter real rout = 50.0 from (0:inf);
+  parameter real av = 20.0 from (0:inf);
+  parameter real vlim = 2.0 from (0:inf);
+  analog begin
+    I(in,gnd) <+ V(in,gnd)/rin;
+    I(out,gnd) <+ (V(out,gnd)-vlim*tanh(av*V(in,gnd)/vlim))/rout;
+  end
+endmodule
